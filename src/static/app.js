@@ -56,7 +56,9 @@ document.addEventListener("DOMContentLoaded", () => {
           if (event.target.classList.contains("delete-icon")) {
             const activityName = event.target.getAttribute("data-activity");
             const email = event.target.getAttribute("data-email");
-            if (confirm(`Remove ${email} from ${activityName}?`)) {
+            const safeActivityName = escapeHtml(activityName);
+            const safeEmail = escapeHtml(email);
+            if (confirm(`Remove ${safeEmail} from ${safeActivityName}?`)) {
               try {
                 const response = await fetch(`/activities/${encodeURIComponent(activityName)}/unregister?email=${encodeURIComponent(email)}`, {
                   method: "POST",
