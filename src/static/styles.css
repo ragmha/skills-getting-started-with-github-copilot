@@ -1,6 +1,3 @@
-ul {
-  list-style-type: none;
-}
 * {
   box-sizing: border-box;
   margin: 0;
@@ -89,8 +86,8 @@ section h3 {
 }
 
 .participants-list {
-  list-style: disc;
-  padding-left: 25px;
+  list-style: none;
+  padding-left: 0;
   margin: 0;
 }
 
@@ -98,6 +95,49 @@ section h3 {
   padding: 4px 0;
   color: #555;
   font-size: 14px;
+}
+
+.participant-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.participant-email {
+  flex: 1;
+}
+
+.delete-icon {
+  background-color: transparent;
+  color: #d32f2f;
+  border: none;
+  padding: 8px 12px;
+  min-width: 44px;
+  min-height: 44px;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: background-color 0.2s, color 0.2s;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.delete-icon:hover {
+  background-color: #ffebee;
+  color: #b71c1c;
+}
+
+.delete-icon:focus {
+  outline: 2px solid #d32f2f;
+  outline-offset: 2px;
+  background-color: #ffebee;
+}
+
+.delete-icon:active {
+  background-color: #ffcdd2;
+  color: #b71c1c;
 }
 
 .no-participants {
