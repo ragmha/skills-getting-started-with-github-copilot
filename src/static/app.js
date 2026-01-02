@@ -77,7 +77,7 @@ document.addEventListener("DOMContentLoaded", () => {
             deleteButton.setAttribute("aria-label", "Remove participant");
             deleteButton.setAttribute("data-activity", name);
             deleteButton.setAttribute("data-email", email);
-            deleteButton.textContent = "🗑";
+            deleteButton.innerHTML = "&#128465;";
             listItem.appendChild(deleteButton);
             
             participantsList.appendChild(listItem);
