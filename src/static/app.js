@@ -4,6 +4,14 @@ document.addEventListener("DOMContentLoaded", () => {
   const signupForm = document.getElementById("signup-form");
   const messageDiv = document.getElementById("message");
 
+  // Function to escape HTML entities to prevent XSS attacks
+  function escapeHtml(text) {
+    if (text == null) return '';
+    const div = document.createElement('div');
+    div.textContent = text;
+    return div.innerHTML;
+  }
+
   // Function to fetch activities from API
   async function fetchActivities() {
     try {
@@ -24,17 +32,17 @@ document.addEventListener("DOMContentLoaded", () => {
           ? `<ul class="participants-list">
               ${details.participants.map(email => `
                 <li class="participant-item">
-                  <span class="participant-email">${email}</span>
-                  <button class="delete-icon" type="button" title="Remove participant" aria-label="Remove participant" data-activity="${name}" data-email="${email}">&#128465;</button>
+                  <span class="participant-email">${escapeHtml(email)}</span>
+                  <button class="delete-icon" type="button" title="Remove participant" aria-label="Remove participant" data-activity="${escapeHtml(name)}" data-email="${escapeHtml(email)}">&#128465;</button>
                 </li>
               `).join('')}
             </ul>`
           : '<p class="no-participants">No participants yet. Be the first to sign up!</p>';
 
         activityCard.innerHTML = `
-          <h4>${name}</h4>
-          <p>${details.description}</p>
-          <p><strong>Schedule:</strong> ${details.schedule}</p>
+          <h4>${escapeHtml(name)}</h4>
+          <p>${escapeHtml(details.description)}</p>
+          <p><strong>Schedule:</strong> ${escapeHtml(details.schedule)}</p>
           <p><strong>Availability:</strong> ${spotsLeft} spots left</p>
           <div class="participants-section">
             <p class="participants-label"><strong>Participants:</strong></p>
