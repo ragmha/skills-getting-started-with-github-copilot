@@ -115,7 +115,9 @@ section h3 {
   background-color: transparent;
   color: #d32f2f;
   border: none;
-  padding: 4px 8px;
+  padding: 8px 12px;
+  min-width: 44px;
+  min-height: 44px;
   font-size: 16px;
   cursor: pointer;
   border-radius: 4px;
