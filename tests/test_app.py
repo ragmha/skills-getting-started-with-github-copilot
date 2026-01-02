@@ -99,11 +99,11 @@ def test_unregister_participant():
     activity = "Chess Club"
     response = client.post(f"/activities/{activity}/unregister?email={email}")
     assert response.status_code == 200
-    assert f"Removed {email}" in response.json()["message"]
+    assert f"Unregistered {email}" in response.json()["message"]
     # Try unregistering again (should fail)
     response2 = client.post(f"/activities/{activity}/unregister?email={email}")
     assert response2.status_code == 400
-    assert "not registered" in response2.json()["detail"]
+    assert "not signed up" in response2.json()["detail"]
 
 
 def test_activity_not_found():
