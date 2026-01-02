@@ -1,10 +1,13 @@
 import pytest
+import copy
 from fastapi.testclient import TestClient
 from src.app import app, activities
 
 client = TestClient(app)
 
-# Store the initial state of activities
+# Capture the initial state from app.py for test isolation
+# NOTE: This duplication is intentional to ensure tests have a stable baseline.
+# If the initial state in src/app.py changes, update this constant accordingly.
 INITIAL_ACTIVITIES = {
     "Chess Club": {
         "description": "Learn strategies and compete in chess tournaments",
@@ -67,13 +70,7 @@ INITIAL_ACTIVITIES = {
 def reset_activities():
     """Reset activities to initial state before each test"""
     activities.clear()
-    for activity_name, activity_data in INITIAL_ACTIVITIES.items():
-        activities[activity_name] = {
-            "description": activity_data["description"],
-            "schedule": activity_data["schedule"],
-            "max_participants": activity_data["max_participants"],
-            "participants": activity_data["participants"].copy()
-        }
+    activities.update(copy.deepcopy(INITIAL_ACTIVITIES))
     yield
 
 
