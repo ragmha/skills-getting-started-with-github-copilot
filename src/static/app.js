@@ -43,28 +43,28 @@ document.addEventListener("DOMContentLoaded", () => {
         `;
 
         activitiesList.appendChild(activityCard);
-      // Add delete icon click handler
-      activityCard.addEventListener("click", async (event) => {
-        if (event.target.classList.contains("delete-icon")) {
-          const activityName = event.target.getAttribute("data-activity");
-          const email = event.target.getAttribute("data-email");
-          if (confirm(`Remove ${email} from ${activityName}?`)) {
-            try {
-              const response = await fetch(`/activities/${encodeURIComponent(activityName)}/unregister?email=${encodeURIComponent(email)}`, {
-                method: "POST",
-              });
-              const result = await response.json();
-              if (response.ok) {
-                fetchActivities();
-              } else {
-                alert(result.detail || "Failed to remove participant.");
+        // Add delete icon click handler
+        activityCard.addEventListener("click", async (event) => {
+          if (event.target.classList.contains("delete-icon")) {
+            const activityName = event.target.getAttribute("data-activity");
+            const email = event.target.getAttribute("data-email");
+            if (confirm(`Remove ${email} from ${activityName}?`)) {
+              try {
+                const response = await fetch(`/activities/${encodeURIComponent(activityName)}/unregister?email=${encodeURIComponent(email)}`, {
+                  method: "POST",
+                });
+                const result = await response.json();
+                if (response.ok) {
+                  fetchActivities();
+                } else {
+                  alert(result.detail || "Failed to remove participant.");
+                }
+              } catch (error) {
+                alert("Error removing participant.");
               }
-            } catch (error) {
-              alert("Error removing participant.");
             }
           }
-        }
-      });
+        });
 
         // Add option to select dropdown
         const option = document.createElement("option");
