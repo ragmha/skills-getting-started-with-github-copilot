@@ -1,4 +1,3 @@
-import pytest
 import copy
 from fastapi.testclient import TestClient
 from src.app import app, activities
